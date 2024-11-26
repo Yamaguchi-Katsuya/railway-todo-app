@@ -8,6 +8,10 @@
   display: flex;
   justify-content: space-between;
 
+  @media screen and (max-width: 768px) {
+    height: 60px;
+  }
+
   .sign-out-button {
     color: #ffffff;
     margin: auto 25px auto auto;

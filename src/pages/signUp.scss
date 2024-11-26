@@ -7,36 +7,37 @@
   @media screen and (max-width: 768px) {
     width: 80%;
   }
-}
-.signup-form {
-  margin: 25px 0;
-  color: #555555;
-}
 
-.email-input,
-.name-input,
-.password-input {
-  width: 100%;
-  font-size: large;
-  height: 30px;
-  margin-bottom: 25px;
-
-  @media screen and (max-width: 768px) {
-    height: 25px;
-    margin-bottom: 15px;
+  &-form {
+    margin: 25px 0;
+    color: #555555;
   }
-}
 
-.signup-button {
-  background-color: #242f9b;
-  color: #ffffff;
-  width: 100px;
-  height: 40px;
-  border-radius: 5px;
+  &-button {
+    background-color: #242f9b;
+    color: #ffffff;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
 
-  @media screen and (max-width: 768px) {
-    width: 80px;
+    @media screen and (max-width: 768px) {
+      width: 80px;
+      height: 30px;
+    }
+  }
+
+  .email-input,
+  .name-input,
+  .password-input {
+    width: 100%;
+    font-size: large;
     height: 30px;
+    margin-bottom: 25px;
+
+    @media screen and (max-width: 768px) {
+      height: 25px;
+      margin-bottom: 15px;
+    }
   }
 }
 
