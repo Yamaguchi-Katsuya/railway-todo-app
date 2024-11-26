@@ -83,7 +83,10 @@ export const EditTask = () => {
 
   const adjustDate = (date) => {
     var ymd = new Date(date).toLocaleDateString('sv-SE');
-    var time = new Date(date).toLocaleTimeString('ja-JP', {minute: '2-digit', second: '2-digit'});
+    var time = new Date(date).toLocaleTimeString('ja-JP', {
+      minute: '2-digit',
+      second: '2-digit',
+    });
     return `${ymd}T${time}`;
   };
 

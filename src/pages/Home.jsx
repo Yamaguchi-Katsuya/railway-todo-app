@@ -146,7 +146,9 @@ const Tasks = (props) => {
     }
 
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffHours = Math.floor(
+      (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
 
     return `${diffDays}日 ${diffHours}時間 ${diffMinutes}分`;
@@ -154,7 +156,7 @@ const Tasks = (props) => {
 
   const dateFormat = (date) => {
     var ymd = new Date(date).toLocaleDateString('sv-SE');
-    var time = new Date(date).toLocaleTimeString('ja-JP', {hour12:false});
+    var time = new Date(date).toLocaleTimeString('ja-JP', { hour12: false });
     return `${ymd} ${time}`;
   };
 
