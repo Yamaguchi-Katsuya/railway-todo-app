@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.edit-task {
+  width: 1000px;
+  margin: 0 auto;
+
+  &-form {
+    color: #555555;
+  }
+
+  &-title,
+  &-detail {
+    width: 300px;
+    margin-bottom: 25px;
+  }
+
+  &-button {
+    background-color: #242f9b;
+    color: #ffffff;
+  }
+
+  .delete-task-button {
+    color: #ff3333;
+  }
+}
+
+.error-message {
+  color: #ff3333;
+}
