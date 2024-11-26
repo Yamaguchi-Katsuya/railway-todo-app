@@ -128,6 +128,28 @@ const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
   if (tasks === null) return <></>;
 
+  const getRemainingTime = (limit) => {
+    const now = new Date();
+    const deadline = new Date(limit);
+    const diffMs = deadline - now; // 差をミリ秒で取得
+
+    if (diffMs <= 0) {
+      return '期限切れ';
+    }
+
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    return `${diffDays}日 ${diffHours}時間 ${diffMinutes}分`;
+  };
+
+  const dateFormat = (date) => {
+    var ymd = new Date(date).toLocaleDateString('sv-SE');
+    var time = new Date(date).toLocaleTimeString('ja-JP', {hour12:false});
+    return `${ymd} ${time}`;
+  };
+
   if (isDoneDisplay == 'done') {
     return (
       <ul>
@@ -142,6 +164,8 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 {task.title}
+                <br />
+                期限: {task.limit ? dateFormat(task.limit) : 'なし'}
                 <br />
                 {task.done ? '完了' : '未完了'}
               </Link>
@@ -164,6 +188,10 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               {task.title}
+              <br />
+              期限: {task.limit ? dateFormat(task.limit) : 'なし'}
+              <br />
+              {task.limit ? `あと ${getRemainingTime(task.limit)}` : ''}
               <br />
               {task.done ? '完了' : '未完了'}
             </Link>

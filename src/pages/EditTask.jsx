@@ -12,10 +12,15 @@ export const EditTask = () => {
   const [cookies] = useCookies();
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
+  const [limit, setLimit] = useState('');
   const [isDone, setIsDone] = useState();
   const [errorMessage, setErrorMessage] = useState('');
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleLimitChange = (e) => {
+    const limitDate = new Date(e.target.value).toISOString();
+    setLimit(limitDate);
+  };
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done');
   const onUpdateTask = () => {
     console.log(isDone);
@@ -23,6 +28,7 @@ export const EditTask = () => {
       title: title,
       detail: detail,
       done: isDone,
+      limit: limit,
     };
 
     axios
@@ -64,14 +70,22 @@ export const EditTask = () => {
       })
       .then((res) => {
         const task = res.data;
+        console.log(task);
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
+        setLimit(task.limit);
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
       });
   }, []);
+
+  const adjustDate = (date) => {
+    var ymd = new Date(date).toLocaleDateString('sv-SE');
+    var time = new Date(date).toLocaleTimeString('ja-JP', {minute: '2-digit', second: '2-digit'});
+    return `${ymd}T${time}`;
+  };
 
   return (
     <div>
@@ -96,6 +110,15 @@ export const EditTask = () => {
             onChange={handleDetailChange}
             className="edit-task-detail"
             value={detail}
+          />
+          <br />
+          <label>期限</label>
+          <br />
+          <input
+            type="datetime-local"
+            onChange={handleLimitChange}
+            className="edit-task-limit"
+            value={limit ? adjustDate(limit) : ''}
           />
           <br />
           <div>
