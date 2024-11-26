@@ -7,43 +7,33 @@ import prettierConfig from 'eslint-config-prettier';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    // ファイルの対象を指定
     files: ['**/*.{js,mjs,cjs,jsx}'],
-  },
-  {
-    // グローバル変数や言語オプションを設定
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
         ...globals.jest,
       },
-    },
-  },
-  // JavaScript の推奨設定を読み込む
-  pluginJs.configs.recommended,
-  // React の推奨設定を読み込む
-  {
-    ...pluginReact.configs.flat.recommended,
-    settings: {
-      react: {
-        version: 'detect', // React のバージョンを自動検出
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
-  },
-  // Prettier の競合解消設定を追加
-  prettierConfig,
-  {
-    // Prettier プラグインを有効化し、競合エラーを出す設定
     plugins: {
       prettier: pluginPrettier,
+      react: pluginReact,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
     rules: {
+      ...pluginJs.configs.recommended.rules,
+      ...pluginReact.configs.flat.recommended.rules,
+      ...prettierConfig.rules,
       'prettier/prettier': 'error', // Prettier のエラーを ESLint に統合
-    },
-  },
-  {
-    rules: {
       'react/react-in-jsx-scope': 'off',
     },
   },
