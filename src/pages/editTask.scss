@@ -4,23 +4,67 @@
   width: 1000px;
   margin: 0 auto;
 
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+
   &-form {
     color: #555555;
+
+    @media screen and (max-width: 768px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 80%;
+    }
   }
 
   &-title,
-  &-detail {
+  &-detail,
+  &-limit {
     width: 300px;
     margin-bottom: 25px;
+
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 90%;
+    }
   }
 
   .edit-task-button {
     background-color: #242f9b;
     color: #ffffff;
+    width: 80px;
+    height: 40px;
+    margin: 25px 5px;
+    border-radius: 5px;
+
+    @media screen and (max-width: 768px) {
+      width: 60px;
+      height: 30px;
+      margin: 10px 3px;
+    }
   }
 
   .delete-task-button {
     color: #ff3333;
+    border: solid 1px #ff3333;
+    width: 80px;
+    height: 40px;
+    margin: 25px 5px;
+    border-radius: 5px;
+
+    @media screen and (max-width: 768px) {
+      width: 60px;
+      height: 30px;
+      margin: 10px 3px;
+    }
   }
 }
 

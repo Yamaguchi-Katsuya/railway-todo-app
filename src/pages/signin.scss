@@ -3,29 +3,45 @@
 .signin {
   width: 500px;
   margin: 0 auto;
+
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 }
 
 .signin-form {
   margin: 25px 0;
 }
 
-.email-label, .password-label {
+.email-label,
+.password-label {
   color: #555555;
 }
 
-.email-input, .password-input {
+.email-input,
+.password-input {
   width: 100%;
   font-size: large;
   height: 30px;
   margin-bottom: 25px;
+
+  @media screen and (max-width: 768px) {
+    height: 25px;
+    margin-bottom: 15px;
+  }
 }
 
 .signin-button {
-  background-color: #242F9B;
+  background-color: #242f9b;
   color: #ffffff;
   width: 100px;
   height: 40px;
   border-radius: 5px;
+
+  @media screen and (max-width: 768px) {
+    width: 80px;
+    height: 30px;
+  }
 }
 
 .error-message {
