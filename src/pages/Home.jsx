@@ -6,6 +6,12 @@ import { Header } from '../components/Header';
 import { url } from '../const';
 import './home.scss';
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Tokyo');
 
 export const Home = () => {
   const [isDoneDisplay, setIsDoneDisplay] = useState('todo'); // todo->未完了 done->完了
@@ -137,9 +143,9 @@ const Tasks = (props) => {
   if (tasks === null) return <></>;
 
   const getRemainingTime = (limit) => {
-    const now = new Date();
-    const deadline = new Date(limit);
-    const diffMs = deadline - now; // 差をミリ秒で取得
+    const now = dayjs();
+    const deadline = dayjs(limit);
+    const diffMs = deadline.diff(now);
 
     if (diffMs <= 0) {
       return '期限切れ';
@@ -155,9 +161,7 @@ const Tasks = (props) => {
   };
 
   const dateFormat = (date) => {
-    var ymd = new Date(date).toLocaleDateString('sv-SE');
-    var time = new Date(date).toLocaleTimeString('ja-JP', { hour12: false });
-    return `${ymd} ${time}`;
+    return dayjs(date).format('YYYY-MM-DD HH:mm');
   };
 
   if (isDoneDisplay == 'done') {

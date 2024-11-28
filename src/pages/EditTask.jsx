@@ -5,6 +5,12 @@ import { useCookies } from 'react-cookie';
 import { url } from '../const';
 import { useNavigate, useParams } from 'react-router-dom';
 import './editTask.scss';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Tokyo');
 
 export const EditTask = () => {
   const navigate = useNavigate();
@@ -18,7 +24,7 @@ export const EditTask = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
   const handleLimitChange = (e) => {
-    const limitDate = new Date(e.target.value).toISOString();
+    const limitDate = dayjs(e.target.value).format();
     setLimit(limitDate);
   };
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done');
@@ -82,12 +88,7 @@ export const EditTask = () => {
   }, []);
 
   const adjustDate = (date) => {
-    var ymd = new Date(date).toLocaleDateString('sv-SE');
-    var time = new Date(date).toLocaleTimeString('ja-JP', {
-      minute: '2-digit',
-      second: '2-digit',
-    });
-    return `${ymd}T${time}`;
+    return dayjs(date).format('YYYY-MM-DDTHH:mm');
   };
 
   return (

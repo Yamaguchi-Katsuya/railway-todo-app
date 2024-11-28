@@ -5,6 +5,12 @@ import { url } from '../const';
 import { Header } from '../components/Header';
 import './newTask.scss';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Tokyo');
 
 export const NewTask = () => {
   const [selectListId, setSelectListId] = useState();
@@ -18,7 +24,7 @@ export const NewTask = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
   const handleLimitChange = (e) => {
-    const limitDate = new Date(e.target.value).toISOString();
+    const limitDate = dayjs(e.target.value).format();
     setLimit(limitDate);
   };
   const handleSelectList = (id) => setSelectListId(id);
